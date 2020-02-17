@@ -42,12 +42,14 @@ export const Text = styled.p`
   font-family: ${fonts.raleway};
 `;
 
-export const Form = styled.div`
+export const Form = styled.form`
   margin-top: 50px;
   width: 100%;
 `;
 
-export const Button = styled.button`
+export const Button = styled.button.attrs({
+  type: "submit"
+})`
   border: 0;
   background: ${colors.primary};
   border: 2px solid ${colors.primary};

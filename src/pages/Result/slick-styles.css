@@ -1,0 +1,9 @@
+.slick-track {
+  display: flex;
+  align-items: center;
+}
+
+.slick-prev:before,
+.slick-next:before {
+  color: #0088EF;
+}

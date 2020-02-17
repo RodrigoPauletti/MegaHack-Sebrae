@@ -5,7 +5,8 @@ import { GlobalStyle } from "./styles.js";
 // import RegisterOptions from "./pages/Register/RegisterOptions/index.js";
 // import RegisterNoCompany from "./pages/Register/RegisterNoCompany.js";
 // import RegisterCompany from "./pages/Register/RegisterCompany.js";
-import Questions from "./pages/Questions/index.js";
+// import Questions from "./pages/Questions/index.js";
+import Result from "./pages/Result/index.js";
 
 function App() {
   return (
@@ -14,7 +15,8 @@ function App() {
       {/* <RegisterOptions /> */}
       {/* <RegisterNoCompany /> */}
       {/* <RegisterCompany /> */}
-      <Questions />
+      {/* <Questions /> */}
+      <Result />
       <GlobalStyle />
     </>
   );

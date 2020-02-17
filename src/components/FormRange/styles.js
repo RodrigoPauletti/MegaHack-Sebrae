@@ -9,10 +9,11 @@ import {
 } from "../Form/styles.js";
 
 export const FormInputContainer = styled(FormInputContainerInitial)`
-  margin: 0 0 32px;
-  padding: 32px 0 0;
-  &:not(:first-child) {
-    border-top: 1px solid ${colors.line};
+  margin: 32px 0 0;
+  padding: 0 0 32px;
+  &:first-child {
+    margin: 0;
+    border-bottom: 1px solid ${colors.line};
   }
 `;
 
