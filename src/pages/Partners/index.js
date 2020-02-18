@@ -3,7 +3,7 @@ import { useHistory } from "react-router-dom";
 
 import { Container, Section, BackButton } from "../../styles.js";
 import {
-  Partners,
+  PartnersCardListPartner,
   PartnersTitle,
   PartnersCardLeft,
   PartnersLogo,
@@ -31,7 +31,7 @@ export default function Result() {
     <>
       <Container>
         <Section>
-          <Partners>
+          <PartnersCardListPartner>
             <BackButton onClick={() => history.push("/result", { results })} />
             <PartnersTitle>Parceiros</PartnersTitle>
             <PartnersCardListPartnerScreen>
@@ -54,7 +54,7 @@ export default function Result() {
                 );
               })}
             </PartnersCardListPartnerScreen>
-          </Partners>
+          </PartnersCardListPartner>
         </Section>
       </Container>
     </>

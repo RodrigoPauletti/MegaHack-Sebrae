@@ -3,7 +3,7 @@ import styled, { createGlobalStyle, keyframes } from "styled-components";
 import fonts from "./fonts.js";
 import { colors } from "./variables.js";
 
-import logoRaioX from "./assets/logo-raiox.svg";
+import logoRaioX from "./assets/logo-raiox.png";
 import arrowLeft from "./assets/arrow-left.svg";
 
 const animationName = keyframes`
@@ -52,7 +52,7 @@ export const Section = styled.section`
     max-width: 650px;
   }
   @media (min-width: 1024px) {
-    max-width: 990px;
+    max-width: 960px;
   }
 `;
 
@@ -80,6 +80,7 @@ export const BackButton = styled.img.attrs({
 
 export const Form = styled.form`
   width: 100%;
+  margin-top: 20px;
   @media (min-width: 769px) {
     margin-top: 50px;
   }
@@ -130,9 +131,7 @@ export const CardList = styled.div`
 
 export const CardsContainer = styled.div`
   width: 100%;
-  @media (max-width: 768px) {
-    margin-top: 0;
-  }
+  margin-top: 62px;
 `;
 
 export const Header = styled.div`

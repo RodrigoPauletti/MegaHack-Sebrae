@@ -3,13 +3,13 @@ import { useHistory } from "react-router-dom";
 
 import { Container, Section, BackButton } from "../../styles.js";
 import {
-  Materials,
   MaterialsTitle,
   MaterialsCardLeft,
   MaterialsLogo,
   MaterialsCardRight,
   MaterialsName,
   MaterialsDownload,
+  MaterialsCardList,
   MaterialsCardListMaterialScreen,
   MaterialCardMaterialScreen
 } from "./styles.js";
@@ -33,7 +33,7 @@ export default function Result() {
     <>
       <Container>
         <Section>
-          <Materials>
+          <MaterialsCardList>
             <BackButton onClick={() => history.push("/result", { results })} />
             <MaterialsTitle>Na prática</MaterialsTitle>
             <MaterialsCardListMaterialScreen>
@@ -53,7 +53,7 @@ export default function Result() {
                 );
               })}
             </MaterialsCardListMaterialScreen>
-          </Materials>
+          </MaterialsCardList>
         </Section>
       </Container>
     </>

@@ -17,16 +17,14 @@ import FormSelect from "../../components/FormSelect/index.js";
 export default function RegisterNoCompany() {
   const history = useHistory();
 
-  function handleSubmit() {
-    history.push(`/questions`, { type: "no-company" });
-  }
-
   return (
     <>
       <Container>
         <Section>
           <Logo />
-          <Form onSubmit={() => handleSubmit()}>
+          <Form
+            onSubmit={() => history.push(`/questions`, { type: "no-company" })}
+          >
             <FormInput
               label="Digite seu nome completo"
               type="text"

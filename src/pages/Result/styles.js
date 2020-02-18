@@ -71,12 +71,14 @@ export const ResultDescription = styled(Text)`
 export const CategoriesResultsGrade = styled.div`
   width: 100%;
 `;
+
 export const CategoryResultGrade = styled.div`
   margin-top: 42px;
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
 `;
+
 export const CategoryResult = styled.div`
   width: 80%;
 `;

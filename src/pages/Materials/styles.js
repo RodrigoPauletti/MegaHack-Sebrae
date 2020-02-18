@@ -16,8 +16,6 @@ export const MaterialsHeader = styled(Header)`
 
 export const MaterialsTitle = styled(HeaderTitle)``;
 
-export const MaterialsCardList = styled.div``;
-
 export const MaterialsCard = styled.div`
   display: flex;
   align-items: center;
@@ -54,9 +52,12 @@ export const MaterialsDownload = styled.a`
   margin-top: 5px;
   text-decoration: none;
   &:hover {
-    // cursor: pointer;
     text-decoration: underline;
   }
+`;
+
+export const MaterialsCardList = styled(CardsContainer)`
+  margin-top: 0;
 `;
 
 export const MaterialsCardListMaterialScreen = styled(MaterialsCardList)`

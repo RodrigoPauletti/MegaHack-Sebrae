@@ -3,7 +3,7 @@ import { useHistory } from "react-router-dom";
 
 import { Container, Section, BackButton } from "../../styles.js";
 import {
-  Courses,
+  CoursesCardListCourse,
   CoursesTitle,
   CoursesCardListCourseScreen,
   CourseCardCourseScreen,
@@ -48,7 +48,7 @@ export default function Result() {
     <>
       <Container>
         <Section>
-          <Courses>
+          <CoursesCardListCourse>
             <BackButton onClick={() => history.push("/result", { results })} />
             <CoursesTitle>Conteúdos Sebrae</CoursesTitle>
             <CoursesCardListCourseScreen>
@@ -72,7 +72,7 @@ export default function Result() {
                 );
               })}
             </CoursesCardListCourseScreen>
-          </Courses>
+          </CoursesCardListCourse>
         </Section>
       </Container>
     </>

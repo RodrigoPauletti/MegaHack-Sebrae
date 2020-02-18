@@ -61,6 +61,10 @@ export const PartnersCategory = styled(TextInternal)`
   color: ${colors.secondary};
 `;
 
+export const PartnersCardListPartner = styled(CardsContainer)`
+  margin-top: 0;
+`;
+
 export const PartnersCardListPartnerScreen = styled(PartnersCardList)`
   flex-direction: column;
   margin-top: 25px;

@@ -19,7 +19,7 @@ function App() {
             <Logo />
             <ButtonsContainer>
               <Button onClick={() => history.push("register-company")}>
-                Já tenho uma empresa aberta
+                Já tenho uma empresa
               </Button>
               <Button onClick={() => history.push("register-no-company")}>
                 Vou abrir minha empresa

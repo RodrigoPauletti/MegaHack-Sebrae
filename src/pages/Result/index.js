@@ -53,7 +53,6 @@ import {
   Materials,
   MaterialsHeader,
   MaterialsTitle,
-  MaterialsCardList,
   MaterialsCard,
   MaterialsCardLeft,
   MaterialsLogo,
@@ -298,7 +297,7 @@ export default function Result() {
                 <Slider {...settings}>
                   {materials?.map(material => {
                     return (
-                      <MaterialsCardList key={material.id}>
+                      <Materials key={material.id}>
                         <MaterialsCard>
                           <MaterialsCardLeft>
                             <MaterialsLogo />
@@ -313,7 +312,7 @@ export default function Result() {
                             </MaterialsDownload>
                           </MaterialsCardRight>
                         </MaterialsCard>
-                      </MaterialsCardList>
+                      </Materials>
                     );
                   })}
                 </Slider>

@@ -60,7 +60,7 @@ const QuestionsList = ({ type, items }) => {
   }
 
   return (
-    <div>
+    <div style={{ width: "100%" }}>
       <Formik
         initialValues={{ ranges: items }}
         onSubmit={(values, actions) => {

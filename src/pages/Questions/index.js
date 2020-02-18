@@ -1,5 +1,5 @@
-import React from "react";
-import { useHistory } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { useHistory, Redirect } from "react-router-dom";
 
 import QuestionsCompany from "./Company/index.js";
 import QuestionsNoCompany from "./NoCompany/index.js";
@@ -12,7 +12,7 @@ export default function Questions() {
 
   const { type } = history.location.state
     ? history.location.state
-    : { type: "company" };
+    : { type: null };
 
   return (
     <>

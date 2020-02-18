@@ -6,21 +6,17 @@ import { colors } from "../../variables.js";
 export const OpeningText = styled.p`
   color: ${colors.gray};
   font-family: ${fonts.raleway};
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 500;
   margin: 38px 0 0;
   line-height: 17px;
-  text-align: center;
+  text-align: justify;
   width: 100%;
-  &:nth-child(2n + 1),
-  &:nth-child(3n + 1) {
-    text-align: left;
-  }
-  &:nth-child(2n + 1) {
-    margin: 3% 0 0;
+  &:last-of-type {
+    margin-bottom: 20px;
   }
   @media (min-width: 769px) {
-    font-size: 15px;
+    font-size: 16px;
     line-height: 21px;
   }
 `;

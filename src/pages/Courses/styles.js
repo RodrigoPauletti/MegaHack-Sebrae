@@ -62,6 +62,10 @@ export const CourseCardDescription = styled(Text)`
   }
 `;
 
+export const CoursesCardListCourse = styled(CardsContainer)`
+  margin-top: 0;
+`;
+
 export const CoursesCardListCourseScreen = styled(CoursesCardList)`
   flex-direction: column;
 `;
