@@ -1,9 +1,21 @@
-import styled, { createGlobalStyle } from "styled-components";
+import styled, { createGlobalStyle, keyframes } from "styled-components";
 
 import fonts from "./fonts.js";
 import { colors } from "./variables.js";
 
 import logoSebrae from "./assets/logo-sebrae.png";
+import arrowLeft from "./assets/arrow-left.svg";
+
+const animationName = keyframes`
+  0% {
+    opacity: 0;
+    transform: translateX(300px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+`;
 
 export const GlobalStyle = createGlobalStyle`
   html, body {
@@ -28,6 +40,7 @@ export const Section = styled.section`
   width: 100%;
   max-width: 320px;
   padding: 20px;
+  animation: ${animationName} 0.8s;
 `;
 
 export const Logo = styled.img.attrs({
@@ -40,6 +53,16 @@ export const Logo = styled.img.attrs({
 export const Text = styled.p`
   color: ${colors.primary};
   font-family: ${fonts.raleway};
+`;
+
+export const BackButton = styled.img.attrs({
+  src: arrowLeft
+})`
+  height: 24px;
+  margin-bottom: 8px;
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
 export const Form = styled.form`

@@ -19,13 +19,14 @@ export default function FormRadio(props) {
         <FormInputRadioList>
           {props.options?.map((option, index) => {
             return (
-              <FormInputRadio key={option}>
+              <FormInputRadio key={index}>
                 <Radio
                   id={option}
                   name="tipo-empresa"
                   value={option}
                   checked={radio === option}
                   onChange={() => setRadio(option)}
+                  required={props.required}
                 />
                 <CustomRadio onClick={() => setRadio(option)} />
                 <LabelRadio htmlFor={option}>{option}</LabelRadio>

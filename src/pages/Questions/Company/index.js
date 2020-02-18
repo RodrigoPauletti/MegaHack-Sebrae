@@ -9,7 +9,6 @@ export default function QuestionsCompany({ type }) {
         type={type}
         items={[
           {
-            // step: 0,
             categoryName: "Financeiro",
             items: [
               "Eu acompanho meu capital de giro, ou seja, faço o controle de recursos para suprir minha necessidades financeiras para os próximos meses.",
@@ -23,7 +22,6 @@ export default function QuestionsCompany({ type }) {
             ]
           },
           {
-            // step: 1,
             categoryName: "Marketing/Vendas",
             items: [
               "Eu tenho uma estratégia de vendas definida e atualizada.",
@@ -35,7 +33,6 @@ export default function QuestionsCompany({ type }) {
             ]
           },
           {
-            // step: 2,
             categoryName: "Operacional",
             items: [
               "Eu controlo os processos e fluxos operacionais da empresa, levando em conta, fluxos de pagamento, recebimento, fornecedores, contratos, atendimento, etc.",
@@ -49,7 +46,6 @@ export default function QuestionsCompany({ type }) {
             ]
           },
           {
-            // step: 3,
             categoryName: "Produtos/Serviços",
             items: [
               "Eu busco aperfeiçoar meu produto/serviço de acordo com as necessidades do mercado e do usuário.",

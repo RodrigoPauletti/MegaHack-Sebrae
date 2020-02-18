@@ -1,11 +1,21 @@
 import styled from "styled-components";
 
-import { Text } from "../../styles.js";
+import fonts from "../../fonts.js";
+import { colors } from "../../variables.js";
 
-export const OpeningText = styled(Text)`
-  font-size: 18px;
-  font-weight: 600;
-  margin: 35px 0 50px;
-  line-height: 21px;
-  text-align: justify;
+export const OpeningText = styled.p`
+  color: ${colors.gray};
+  font-family: ${fonts.raleway};
+  font-size: 12px;
+  font-weight: 500;
+  margin: 38px 0 0;
+  line-height: 17px;
+  text-align: center;
+  &:nth-child(2n + 1),
+  &:nth-child(3n + 1) {
+    text-align: left;
+  }
+  &:nth-child(2n + 1) {
+    margin: 12px 0 0;
+  }
 `;

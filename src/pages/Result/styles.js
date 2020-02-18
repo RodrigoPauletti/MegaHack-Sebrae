@@ -3,7 +3,6 @@ import styled from "styled-components";
 import fonts from "../../fonts.js";
 import { colors } from "../../variables.js";
 
-import arrowLeft from "../../assets/arrow-left.svg";
 import contaAzul from "../../assets/conta-azul.png";
 import "./slick-styles.css";
 
@@ -58,16 +57,6 @@ export const CardList = styled.div`
   -ms-overflow-style: -ms-autohiding-scrollbar;
 `;
 
-export const BackButton = styled.img.attrs({
-  src: arrowLeft
-})`
-  height: 24px;
-  margin-bottom: 8px;
-  &:hover {
-    cursor: pointer;
-  }
-`;
-
 export const GradeContainer = styled.div`
   text-align: center;
   margin: 48px 0 32px;
@@ -75,7 +64,7 @@ export const GradeContainer = styled.div`
 
 export const GradeText = styled(Text)`
   color: ${colors.gray};
-  font-size: 46px;
+  font-size: 65px;
   font-weight: 800;
   background: ${colors.white};
   display: flex;
@@ -85,7 +74,13 @@ export const GradeText = styled(Text)`
   height: 150px;
   margin: 0 auto;
   border-radius: 100%;
-  border: 13px solid ${colors.yellow};
+  border: 13px solid;
+  border-color: ${props =>
+    props.average < 3
+      ? colors.red
+      : props.average < 5
+      ? colors.yellow
+      : colors.green};
 `;
 
 export const YourGrade = styled(Text)`
@@ -98,9 +93,9 @@ export const ResultText = styled(Text)`
   color: ${colors.gray};
   font-size: 21px;
   color: ${props =>
-    props.average <= 5
+    props.average < 3
       ? colors.red
-      : props.average <= 7.5
+      : props.average < 5
       ? colors.yellow
       : colors.green};
 `;
@@ -117,7 +112,6 @@ export const CategoryResultGrade = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  // align-items: center;
 `;
 export const CategoryResult = styled.div`
   width: 80%;
@@ -125,9 +119,9 @@ export const CategoryResult = styled.div`
 
 export const CategoryName = styled(Text)`
   color: ${props =>
-    props.average <= 2.5
+    props.average < 3
       ? colors.red
-      : props.average <= 3.5
+      : props.average < 5
       ? colors.yellow
       : colors.green};
   font-weight: 600;
@@ -146,18 +140,18 @@ export const CategoryGrade = styled.div`
   justify-content: center;
   align-items: center;
   border-radius: 100%;
-  border: 6px solid red;
+  border: 6px solid ${colors.black};
   border-color: ${props =>
-    props.average <= 2.5
+    props.average < 3
       ? colors.red
-      : props.average <= 3.5
+      : props.average < 5
       ? colors.yellow
       : colors.green};
 `;
 
 export const CategoryGradeText = styled(Text)`
   color: ${colors.gray};
-  font-size: 28px;
+  font-size: 22px;
   font-weight: 800;
 `;
 
@@ -238,16 +232,15 @@ export const PartnersHeader = styled(Header)`
 
 export const PartnersTitle = styled(HeaderTitle)``;
 
-// export const PartnersCardList = styled(CardList)``;
 export const PartnersCardList = styled.div``;
 
 export const PartnersCard = styled(WhiteCard)`
   display: flex;
   align-items: center;
   padding: 28px;
-  // width: 290px;
-  // min-width: 240px;
-  // margin-right: 16px;
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
 export const PartnersCardLeft = styled.div``;
@@ -280,6 +273,7 @@ export const PartnersCategory = styled(Text)`
 
 export const PartnersCardListPartnerScreen = styled(PartnersCardList)`
   flex-direction: column;
+  margin-top: 25px;
 `;
 
 export const PartnerCardPartnerScreen = styled(PartnersCard)`

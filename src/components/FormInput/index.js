@@ -8,7 +8,7 @@ export default function FormInput(props) {
     <>
       <FormInputContainer>
         <Label>{props.label}</Label>
-        <Input></Input>
+        <Input type={props.type} required={props.required}></Input>
       </FormInputContainer>
     </>
   );

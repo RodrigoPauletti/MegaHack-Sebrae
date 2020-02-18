@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useHistory } from "react-router-dom";
 
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
@@ -23,10 +24,6 @@ import {
   CoursesHeader,
   CoursesTitle,
   SeeAll,
-  BackButton,
-  // CoursesCardList,
-  CoursesCardListCourseScreen,
-  CourseCardCourseScreen,
   CourseCard,
   CourseCardHeader,
   CourseCardTitle,
@@ -43,9 +40,7 @@ import {
   PartnersLogo,
   PartnersCardRight,
   PartnersName,
-  PartnersCategory,
-  PartnersCardListPartnerScreen,
-  PartnerCardPartnerScreen
+  PartnersCategory
 } from "./styles.js";
 
 import coursesList from "../Courses/courses";
@@ -61,16 +56,52 @@ function limitDescription(description) {
 }
 
 export default function Result() {
-  const [screen, setScreen] = useState("result");
-  const [courses, setCourses] = useState();
-  const [partners, setPartners] = useState();
+  const history = useHistory();
+
+  const [courses, setCourses] = useState(null);
+  const [partners, setPartners] = useState(null);
+  const [average, setAverage] = useState(null);
+  const [results, setResults] = useState({});
 
   useEffect(() => {
-    setCourses(coursesList);
     setPartners(partnersList);
-  }, []);
 
-  const average = 7.5;
+    async function setAverageGrades(results) {
+      setResults(results.sort(orderByAverageASC));
+      const resultsAverage = results.map(result => result.average);
+      const averageGrades = resultsAverage.reduce((a, b) => {
+        return a + b;
+      }, 0);
+      const generalAverage = averageGrades / results.length;
+      setAverage(generalAverage.toFixed(1));
+    }
+    if (history.location.state && history.location.state.results) {
+      setAverageGrades(history.location.state.results);
+    }
+    const sortedOrderedCourses = sortOrderedCourses(results, coursesList);
+    setCourses(sortedOrderedCourses);
+  }, [history, results]);
+
+  function sortOrderedCourses(array1, array2) {
+    let sortedArray = [];
+    if (array1 && array2) {
+      for (let i = 0; i < array1.length; i++) {
+        for (let x = 0; x < array2.length; x++) {
+          if (array2[x].type === array1[i].categoryName) {
+            sortedArray.push(array2[x]);
+          }
+        }
+      }
+    }
+    return sortedArray;
+  }
+
+  function orderByAverageASC(a, b) {
+    if (a.average > b.average) return 1;
+    if (b.average > a.average) return -1;
+
+    return 0;
+  }
 
   const settings = {
     dots: false,
@@ -80,17 +111,23 @@ export default function Result() {
     slidesToScroll: 1
   };
 
+  function handleChangeRoute(router) {
+    history.push(router, { results });
+  }
+
   return (
     <>
       <Container>
         <Section>
-          {screen === "result" ? (
+          {average ? (
             <>
               <ResultGrades>
                 <GradeContainer>
-                  <GradeText>{average}</GradeText>
+                  <GradeText average={average}>{average}</GradeText>
                   <YourGrade>Sua nota</YourGrade>
-                  <ResultText average={average}>Média</ResultText>
+                  <ResultText average={average}>
+                    {average < 3 ? "Baixa" : average < 5 ? "Média" : "Alta"}
+                  </ResultText>
                 </GradeContainer>
                 <ResultDescription>
                   Eu controlo os processos e fluxos operacionais da empresa,
@@ -99,51 +136,31 @@ export default function Result() {
                 </ResultDescription>
 
                 <CategoriesResultsGrade>
-                  <CategoryResultGrade>
-                    <CategoryResult>
-                      <CategoryName average={1}>Financeiro</CategoryName>
-                      <CategoryResultDescription>
-                        Cuidado! Seu nível de prática e conhecimento sobre
-                        FINANÇAS está bem abaixo do recomendado, mas não se
-                        preocupe, o Sebrae está aqui para te ajudar! Confira os
-                        nossos cursos recomendados, leia os artigos e não deixe
-                        de botar em prática o que aprendeu! Também confira
-                        nossos parceiros e se precisar de uma ajuda direta fale
-                        com nossos consultores!
-                      </CategoryResultDescription>
-                    </CategoryResult>
-                    <CategoryGrade average={1}>
-                      <CategoryGradeText>{1}</CategoryGradeText>
-                    </CategoryGrade>
-                  </CategoryResultGrade>
-                  <CategoryResultGrade>
-                    <CategoryResult>
-                      <CategoryName average={5}>Mercado</CategoryName>
-                      <CategoryResultDescription>
-                        Parabéns! Você domina a área de FINANÇAS da sua empresa,
-                        isso é um excelente caminho para o sucesso, mantenha-se
-                        atualizado e continue acompanhando no dia a dia.
-                      </CategoryResultDescription>
-                    </CategoryResult>
-                    <CategoryGrade average={5}>
-                      <CategoryGradeText>{5}</CategoryGradeText>
-                    </CategoryGrade>
-                  </CategoryResultGrade>
-                  <CategoryResultGrade>
-                    <CategoryResult>
-                      <CategoryName average={3}>Produtos/Serviços</CategoryName>
-                      <CategoryResultDescription>
-                        Bom. Seu nível de prática e conhecimento sobre FINANÇAS
-                        porém poderia ser melhor, aproveite que separamos alguns
-                        conteúdo para você e vire um expert no assunto! Também
-                        confira nossos parceiros e se precisar de uma ajuda
-                        direta fale com nossos consultores!
-                      </CategoryResultDescription>
-                    </CategoryResult>
-                    <CategoryGrade average={3}>
-                      <CategoryGradeText>{3}</CategoryGradeText>
-                    </CategoryGrade>
-                  </CategoryResultGrade>
+                  {results &&
+                    results.length > 0 &&
+                    results?.map((result, index) => {
+                      return (
+                        <CategoryResultGrade key={index}>
+                          <CategoryResult>
+                            <CategoryName average={result.average.toFixed(1)}>
+                              {result.categoryName}
+                            </CategoryName>
+                            <CategoryResultDescription>
+                              {result.average < 3
+                                ? `Cuidado! Seu nível de prática e conhecimento sobre ${result.categoryName.toUpperCase()} está bem abaixo do recomendado, mas não se preocupe, o Sebrae está aqui para te ajudar! Confira os nossos cursos recomendados, leia os artigos e não deixe de botar em prática o que aprendeu! Também confira nossos parceiros e se precisar de uma ajuda direta fale com nossos consultores!`
+                                : result.average < 5
+                                ? `Bom. Seu nível de prática e conhecimento sobre ${result.categoryName.toUpperCase()} porém poderia ser melhor, aproveite que separamos alguns conteúdo para você e vire um expert no assunto! Também confira nossos parceiros e se precisar de uma ajuda direta fale com nossos consultores!`
+                                : `Parabéns! Você domina a área de ${result.categoryName.toUpperCase()} da sua empresa, isso é um excelente caminho para o sucesso, mantenha-se atualizado e continue acompanhando no dia a dia.`}
+                            </CategoryResultDescription>
+                          </CategoryResult>
+                          <CategoryGrade average={result.average.toFixed(1)}>
+                            <CategoryGradeText>
+                              {result.average.toFixed(1).toString()}
+                            </CategoryGradeText>
+                          </CategoryGrade>
+                        </CategoryResultGrade>
+                      );
+                    })}
                 </CategoriesResultsGrade>
               </ResultGrades>
 
@@ -151,15 +168,14 @@ export default function Result() {
                 <Courses>
                   <CoursesHeader>
                     <CoursesTitle>Conteúdos Sebrae</CoursesTitle>
-                    <SeeAll onClick={() => setScreen("coursesList")}>
+                    <SeeAll onClick={() => handleChangeRoute("courses")}>
                       Ver todos >
                     </SeeAll>
                   </CoursesHeader>
-                  {/* <CoursesCardList> */}
                   <Slider {...settings}>
                     {courses?.map(course => {
                       return (
-                        <div>
+                        <div key={course.id}>
                           <CourseCard key={course.id} color={course.color}>
                             <CourseCardHeader href={course.url} target="_blank">
                               {course.title}
@@ -174,7 +190,6 @@ export default function Result() {
                         </div>
                       );
                     })}
-                    {/* </CoursesCardList> */}
                   </Slider>
                 </Courses>
               ) : (
@@ -182,22 +197,24 @@ export default function Result() {
               )}
 
               {/* <Chat>
-                <ChatTitle>Chat</ChatTitle>
-                <ChatText>Converse em tempo real com um especialista</ChatText>
-              </Chat> */}
+                    <ChatTitle>Chat</ChatTitle>
+                    <ChatText>Converse em tempo real com um especialista</ChatText>
+                  </Chat> */}
 
               <Partners>
                 <PartnersHeader>
                   <PartnersTitle>Parceiros</PartnersTitle>
-                  <SeeAll onClick={() => setScreen("partnersList")}>
+                  <SeeAll onClick={() => handleChangeRoute("partners")}>
                     Ver todos >
                   </SeeAll>
                 </PartnersHeader>
                 <Slider {...settings}>
                   {partners?.map(partner => {
                     return (
-                      <PartnersCardList>
-                        <PartnersCard key={partner.id}>
+                      <PartnersCardList key={partner.id}>
+                        <PartnersCard
+                          onClick={() => history.push("/partner-detail")}
+                        >
                           <PartnersCardLeft>
                             <PartnersLogo />
                           </PartnersCardLeft>
@@ -215,66 +232,7 @@ export default function Result() {
               </Partners>
             </>
           ) : (
-            <>
-              {screen === "coursesList" ? (
-                <>
-                  <Courses>
-                    <BackButton onClick={() => setScreen("result")} />
-                    <CoursesTitle>Conteúdos Sebrae</CoursesTitle>
-                    <CoursesCardListCourseScreen>
-                      {courses?.map(course => {
-                        return (
-                          <CourseCardCourseScreen
-                            key={course.id}
-                            color={course.color}
-                          >
-                            <CourseCardHeader href={course.url} target="_blank">
-                              {course.title}
-                            </CourseCardHeader>
-                            <CourseCardTitle color={course.color}>
-                              {course.type}
-                            </CourseCardTitle>
-                            <CourseCardDescription>
-                              {course.description}
-                            </CourseCardDescription>
-                          </CourseCardCourseScreen>
-                        );
-                      })}
-                    </CoursesCardListCourseScreen>
-                  </Courses>
-                </>
-              ) : (
-                <>
-                  {screen === "partnersList" ? (
-                    <>
-                      <Partners>
-                        <BackButton onClick={() => setScreen("result")} />
-                        <PartnersTitle>Parceiros</PartnersTitle>
-                        <PartnersCardListPartnerScreen>
-                          {partners?.map(partner => {
-                            return (
-                              <PartnerCardPartnerScreen key={partner.id}>
-                                <PartnersCardLeft>
-                                  <PartnersLogo />
-                                </PartnersCardLeft>
-                                <PartnersCardRight>
-                                  <PartnersName>{partner.name}</PartnersName>
-                                  <PartnersCategory>
-                                    {partner.category}
-                                  </PartnersCategory>
-                                </PartnersCardRight>
-                              </PartnerCardPartnerScreen>
-                            );
-                          })}
-                        </PartnersCardListPartnerScreen>
-                      </Partners>
-                    </>
-                  ) : (
-                    <></>
-                  )}
-                </>
-              )}
-            </>
+            <>Você precisa realizar o teste para acessar essa tela</>
           )}
         </Section>
       </Container>

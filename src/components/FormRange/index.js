@@ -8,8 +8,11 @@ import {
   LabelRangeValue
 } from "./styles.js";
 
-/* <h1>TODO: Adicionar 'TIP' em cada pergunta para dar um resumo do que significa (Ex.: Fluxo de caixa)</h1> */
-/* <h1>TODO: No responsivo, remover 'TIP' e deixar o resumo já visível</h1> */
+/*
+TODO:
+Adicionar 'TIP' em cada pergunta para dar um resumo do que significa (Ex.: Fluxo de caixa)
+No responsivo, remover 'TIP' e deixar o resumo já visível
+*/
 
 function FormRange(props) {
   const [rangeValue, setRangeValue] = useState(0);
@@ -21,9 +24,6 @@ function FormRange(props) {
     },
     [props]
   );
-
-  // TODO: Verificar pq é loggado TODOS os inputs quando um só é alterado
-  // console.log("FormRange PROPS", props);
 
   const options = [0, 1, 2, 3, 4, 5];
 
@@ -38,12 +38,9 @@ function FormRange(props) {
           onChange={event => handleChange(parseInt(event.target.value))}
         />
         <LabelRangeValuesList>
-          {options.map(option => {
+          {options.map((option, index) => {
             return (
-              <LabelRangeValue
-                key={option}
-                onClick={() => handleChange(option)}
-              >
+              <LabelRangeValue key={index} onClick={() => handleChange(option)}>
                 {option}
               </LabelRangeValue>
             );
