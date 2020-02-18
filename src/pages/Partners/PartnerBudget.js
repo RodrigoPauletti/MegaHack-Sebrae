@@ -9,15 +9,20 @@ import FormSelect from "../../components/FormSelect/index.js";
 
 export default function RegisterNoCompany() {
   const history = useHistory();
+  const { results } = history.location.state
+    ? history.location.state
+    : { results: null };
 
   return (
     <>
       <Container>
         <Section>
           <PartnerDetailContainer>
-            <BackButton onClick={() => history.push("/partner-detail")} />
+            <BackButton
+              onClick={() => history.push("/partner-detail", { results })}
+            />
             <PartnerDetailLogo />
-            <Form onSubmit={() => history.push("/partners")}>
+            <Form onSubmit={() => history.push("/partners", { results })}>
               <FormInput label="Digite seu nome completo" required={true} />
               <FormInput
                 label="Digite seu e-mail"

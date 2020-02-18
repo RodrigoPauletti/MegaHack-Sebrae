@@ -13,13 +13,18 @@ import {
 
 export default function PartnerBudget() {
   const history = useHistory();
+  const { results } = history.location.state
+    ? history.location.state
+    : { results: null };
 
   return (
     <>
       <Container>
         <Section>
           <PartnerDetailContainer>
-            <BackButton onClick={() => history.push("/partners")} />
+            <BackButton
+              onClick={() => history.push("/partners", { results })}
+            />
             <PartnerDetailInfo>
               <PartnerDetailLogo />
               <PartnerDetailName>Conta Azul</PartnerDetailName>
@@ -33,7 +38,9 @@ export default function PartnerBudget() {
                 clientes com governo, bancos etc
               </PartnerDetailDescription>
             </PartnerDetailInfo>
-            <Button onClick={() => history.push("/partner-budget")}>
+            <Button
+              onClick={() => history.push("/partner-budget", { results })}
+            >
               Solicitar orçamento
             </Button>
           </PartnerDetailContainer>

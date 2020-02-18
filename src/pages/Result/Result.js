@@ -60,7 +60,7 @@ export default function Result() {
 
   const [courses, setCourses] = useState(null);
   const [partners, setPartners] = useState(null);
-  const [average, setAverage] = useState(null);
+  const [average, setAverage] = useState(0);
   const [results, setResults] = useState({});
 
   useEffect(() => {
@@ -84,13 +84,17 @@ export default function Result() {
 
   function sortOrderedCourses(array1, array2) {
     let sortedArray = [];
-    if (array1 && array2) {
-      for (let i = 0; i < array1.length; i++) {
-        for (let x = 0; x < array2.length; x++) {
-          if (array2[x].type === array1[i].categoryName) {
-            sortedArray.push(array2[x]);
+    if (array2.length > 0) {
+      if (array1.length > 0) {
+        for (let i = 0; i < array1.length; i++) {
+          for (let x = 0; x < array2.length; x++) {
+            if (array2[x].type === array1[i].categoryName) {
+              sortedArray.push(array2[x]);
+            }
           }
         }
+      } else {
+        sortedArray = array2;
       }
     }
     return sortedArray;
@@ -107,19 +111,32 @@ export default function Result() {
     dots: false,
     infinite: false,
     speed: 500,
-    slidesToShow: 1,
-    slidesToScroll: 1
+    slidesToShow: 3,
+    slidesToScroll: 3,
+    initialSlide: 0,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 2
+        }
+      },
+      {
+        breakpoint: 768,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1
+        }
+      }
+    ]
   };
-
-  function handleChangeRoute(router) {
-    history.push(router, { results });
-  }
 
   return (
     <>
       <Container>
         <Section>
-          {average ? (
+          {average !== null ? (
             <>
               <ResultGrades>
                 <GradeContainer>
@@ -168,7 +185,9 @@ export default function Result() {
                 <Courses>
                   <CoursesHeader>
                     <CoursesTitle>Conteúdos Sebrae</CoursesTitle>
-                    <SeeAll onClick={() => handleChangeRoute("courses")}>
+                    <SeeAll
+                      onClick={() => history.push("/courses", { results })}
+                    >
                       Ver todos >
                     </SeeAll>
                   </CoursesHeader>
@@ -204,7 +223,9 @@ export default function Result() {
               <Partners>
                 <PartnersHeader>
                   <PartnersTitle>Parceiros</PartnersTitle>
-                  <SeeAll onClick={() => handleChangeRoute("partners")}>
+                  <SeeAll
+                    onClick={() => history.push("/partners", { results })}
+                  >
                     Ver todos >
                   </SeeAll>
                 </PartnersHeader>
@@ -213,7 +234,9 @@ export default function Result() {
                     return (
                       <PartnersCardList key={partner.id}>
                         <PartnersCard
-                          onClick={() => history.push("/partner-detail")}
+                          onClick={() =>
+                            history.push("/partner-detail", { results })
+                          }
                         >
                           <PartnersCardLeft>
                             <PartnersLogo />
@@ -232,7 +255,8 @@ export default function Result() {
               </Partners>
             </>
           ) : (
-            <>Você precisa realizar o teste para acessar essa tela</>
+            // <>Você precisa realizar o teste para acessar essa tela</>
+            <>{history.push("/questions")}</>
           )}
         </Section>
       </Container>

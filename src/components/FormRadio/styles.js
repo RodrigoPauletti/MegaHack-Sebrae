@@ -1,6 +1,5 @@
 import styled from "styled-components";
 
-// import fonts from '../../fonts.js';
 import { colors } from "../../variables.js";
 import { Label as LabelInitial } from "../Form/styles.js";
 

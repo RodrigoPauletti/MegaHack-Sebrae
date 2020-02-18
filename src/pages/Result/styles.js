@@ -40,6 +40,15 @@ export const SeeAll = styled(Text)`
   }
 `;
 
+const Link = styled.a`
+  font-family: ${fonts.raleway};
+  text-decoration: none;
+  &:hover {
+    cursor: pointer;
+    text-decoration: underline;
+  }
+`;
+
 export const WhiteCard = styled.div`
   border-radius: 20px;
   background: ${colors.white};
@@ -176,20 +185,24 @@ export const CourseCard = styled.div`
   margin-right: 32px;
 `;
 
-export const CourseCardHeader = styled.a`
+export const CourseCardHeader = styled(Link)`
   margin: 0;
   color: ${colors.gray};
-  font-family: ${fonts.raleway};
   font-size: 16px;
   font-weight: 500;
-  text-decoration: none;
+  @media (min-width: 769px) {
+    font-size: 18px;
+  }
 `;
 
-export const CourseCardTitle = styled(Text)`
+export const CourseCardTitle = styled(Link)`
   margin-top: 16px;
   color: ${props => props.color};
   font-size: 18px;
   font-weight: 600;
+  @media (min-width: 769px) {
+    font-size: 20px;
+  }
 `;
 
 export const CourseCardDescription = styled(Text)`
@@ -197,6 +210,9 @@ export const CourseCardDescription = styled(Text)`
   color: ${colors.secondary};
   font-size: 12px;
   font-weight: 500;
+  @media (min-width: 769px) {
+    font-size: 15px;
+  }
 `;
 
 export const CoursesCardListCourseScreen = styled(CoursesCardList)`
@@ -274,9 +290,16 @@ export const PartnersCategory = styled(Text)`
 export const PartnersCardListPartnerScreen = styled(PartnersCardList)`
   flex-direction: column;
   margin-top: 25px;
+  @media (min-width: 769px) {
+    flex-direction: row;
+  }
 `;
 
 export const PartnerCardPartnerScreen = styled(PartnersCard)`
   margin: 0 0 16px;
   width: 264px;
+  @media (min-width: 769px) {
+    display: inline-flex;
+    margin: 0 5px 16px 0;
+  }
 `;

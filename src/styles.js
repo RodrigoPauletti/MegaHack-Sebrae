@@ -22,14 +22,18 @@ export const GlobalStyle = createGlobalStyle`
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    height: 100%;
+  }
+  #root {
+    height: 100%;
   }
 `;
 
 export const Container = styled.div`
   background: ${colors.background};
-  // height: 100vh;
   display: flex;
   justify-content: center;
+  min-height: 100%;
 `;
 
 export const Section = styled.section`
@@ -41,6 +45,12 @@ export const Section = styled.section`
   max-width: 320px;
   padding: 20px;
   animation: ${animationName} 0.8s;
+  @media (min-width: 769px) {
+    max-width: 650px;
+  }
+  @media (min-width: 1035px) {
+    max-width: 990px;
+  }
 `;
 
 export const Logo = styled.img.attrs({
@@ -86,7 +96,7 @@ export const Button = styled.button.attrs({
   margin: 15px 0;
   transition: all 0.3s ease;
   &:first-of-type {
-    margin-top: 75px;
+    margin-top: 5%;
   }
   &:hover {
     cursor: pointer;

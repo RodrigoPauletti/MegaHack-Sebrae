@@ -28,13 +28,17 @@ export default function Result() {
 
   function sortOrderedCourses(array1, array2) {
     let sortedArray = [];
-    if (array1 && array2) {
-      for (let i = 0; i < array1.length; i++) {
-        for (let x = 0; x < array2.length; x++) {
-          if (array2[x].type === array1[i].categoryName) {
-            sortedArray.push(array2[x]);
+    if (array2.length > 0) {
+      if (array1.length > 0) {
+        for (let i = 0; i < array1.length; i++) {
+          for (let x = 0; x < array2.length; x++) {
+            if (array2[x].type === array1[i].categoryName) {
+              sortedArray.push(array2[x]);
+            }
           }
         }
+      } else {
+        sortedArray = array2;
       }
     }
     return sortedArray;
@@ -45,7 +49,7 @@ export default function Result() {
       <Container>
         <Section>
           <Courses>
-            <BackButton onClick={() => history.push("/result")} />
+            <BackButton onClick={() => history.push("/result", { results })} />
             <CoursesTitle>Conteúdos Sebrae</CoursesTitle>
             <CoursesCardListCourseScreen>
               {courses?.map(course => {

@@ -42,15 +42,6 @@ export const InputRange = styled.input.attrs(props => ({
       cursor: pointer;
     }
   }
-  // &::-ms-track {
-  //   width: 100%;
-  //   cursor: pointer;
-
-  //   /* Hides the slider so custom styles can be added */
-  //   background: blue;
-  //   border-color: pink;
-  //   color: brown;
-  // }
 `;
 
 export const LabelRangeValuesList = styled.div`
