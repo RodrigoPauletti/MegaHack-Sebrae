@@ -1,15 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 
 import QuestionSection from "../QuestionSection/index.js";
 import FormRangesList from "../FormRangesList/index.js";
 
-import { Button } from "../../styles.js";
-import { Form } from "./styles.js";
+import { ButtonsContainer } from "../../styles.js";
+import { QuestionContainer, Form, Button } from "./styles.js";
 import { Formik } from "formik";
 
 const QuestionsList = ({ type, items }) => {
   const history = useHistory();
+
+  const [actualIndex, setActualIndex] = useState(0);
 
   function strToSlug(str) {
     str = str.replace(/^\s+|\s+$/g, ""); // trim
@@ -30,17 +32,17 @@ const QuestionsList = ({ type, items }) => {
     return str;
   }
 
-  let actualIndex = 0; /* TODO: Utilizar useState */
+  // let actualIndex = 0; /* TODO: Utilizar useState */
 
   function handlePrevious() {
     if (actualIndex > 0) {
-      actualIndex--;
+      setActualIndex(actualIndex - 1);
     }
   }
 
   async function handleNext(itemsLength, ranges) {
     if (actualIndex < itemsLength - 1) {
-      actualIndex++;
+      setActualIndex(actualIndex + 1);
     } else {
       const results = await ranges.map(range => {
         const questionsLength = range.items.length;
@@ -68,8 +70,8 @@ const QuestionsList = ({ type, items }) => {
         {props => (
           <>
             {items?.map((item, index) => {
-              return index /* >= 0 */ === actualIndex ? (
-                <React.Fragment key={index}>
+              return index === actualIndex ? (
+                <QuestionContainer key={index}>
                   <QuestionSection
                     categoryName={item.categoryName}
                     type={type}
@@ -82,26 +84,28 @@ const QuestionsList = ({ type, items }) => {
                       value={props.topics}
                       categoryIndex={index}
                     />
-                    {index > 0 ? (
-                      <Button onClick={handlePrevious}>Anterior</Button>
-                    ) : (
-                      ""
-                    )}
-                    {index < items.length - 1 ? (
-                      <Button onClick={() => handleNext(items.length)}>
-                        Próximo
-                      </Button>
-                    ) : (
-                      <Button
-                        onClick={() =>
-                          handleNext(items.length, props.values?.ranges)
-                        }
-                      >
-                        Finalizar
-                      </Button>
-                    )}
+                    <ButtonsContainer>
+                      {index > 0 ? (
+                        <Button onClick={handlePrevious}>Anterior</Button>
+                      ) : (
+                        ""
+                      )}
+                      {index < items.length - 1 ? (
+                        <Button onClick={() => handleNext(items.length)}>
+                          Próximo
+                        </Button>
+                      ) : (
+                        <Button
+                          onClick={() =>
+                            handleNext(items.length, props.values?.ranges)
+                          }
+                        >
+                          Finalizar
+                        </Button>
+                      )}
+                    </ButtonsContainer>
                   </Form>
-                </React.Fragment>
+                </QuestionContainer>
               ) : (
                 <React.Fragment key={index}></React.Fragment>
               );

@@ -5,8 +5,9 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
-import { Container, Section } from "../../styles.js";
+import { Container, SeeAll } from "../../styles.js";
 import {
+  Section,
   ResultGrades,
   GradeContainer,
   GradeText,
@@ -19,18 +20,23 @@ import {
   CategoryName,
   CategoryResultDescription,
   CategoryGrade,
-  CategoryGradeText,
-  Courses,
-  CoursesHeader,
-  CoursesTitle,
-  SeeAll,
-  CourseCard,
-  CourseCardHeader,
-  CourseCardTitle,
-  CourseCardDescription,
+  CategoryGradeText
   // Chat,
   // ChatTitle,
   // ChatText,
+} from "./styles.js";
+
+import {
+  Courses,
+  CoursesHeader,
+  CoursesTitle,
+  CourseCard,
+  CourseCardHeader,
+  CourseCardTitle,
+  CourseCardDescription
+} from "../Courses/styles.js";
+
+import {
   Partners,
   PartnersHeader,
   PartnersTitle,
@@ -41,10 +47,24 @@ import {
   PartnersCardRight,
   PartnersName,
   PartnersCategory
-} from "./styles.js";
+} from "../Partners/styles.js";
+
+import {
+  Materials,
+  MaterialsHeader,
+  MaterialsTitle,
+  MaterialsCardList,
+  MaterialsCard,
+  MaterialsCardLeft,
+  MaterialsLogo,
+  MaterialsCardRight,
+  MaterialsName,
+  MaterialsDownload
+} from "../Materials/styles.js";
 
 import coursesList from "../Courses/courses";
 import partnersList from "../Partners/partners";
+import materialsList from "../Materials/materials";
 
 function limitDescription(description) {
   const limit = 100;
@@ -60,20 +80,23 @@ export default function Result() {
 
   const [courses, setCourses] = useState(null);
   const [partners, setPartners] = useState(null);
+  const [materials, setMaterials] = useState(null);
   const [average, setAverage] = useState(0);
   const [results, setResults] = useState({});
 
   useEffect(() => {
     setPartners(partnersList);
-
+    setMaterials(materialsList);
     async function setAverageGrades(results) {
-      setResults(results.sort(orderByAverageASC));
-      const resultsAverage = results.map(result => result.average);
-      const averageGrades = resultsAverage.reduce((a, b) => {
-        return a + b;
-      }, 0);
-      const generalAverage = averageGrades / results.length;
-      setAverage(generalAverage.toFixed(1));
+      if (results && results.length) {
+        setResults(results.sort(orderByAverageASC));
+        const resultsAverage = results.map(result => result.average);
+        const averageGrades = resultsAverage.reduce((a, b) => {
+          return a + b;
+        }, 0);
+        const generalAverage = averageGrades / results.length;
+        setAverage(generalAverage.toFixed(1));
+      }
     }
     if (history.location.state && history.location.state.results) {
       setAverageGrades(history.location.state.results);
@@ -147,9 +170,11 @@ export default function Result() {
                   </ResultText>
                 </GradeContainer>
                 <ResultDescription>
-                  Eu controlo os processos e fluxos operacionais da empresa,
-                  levando em conta, fluxos de pagamento, recebimento,
-                  fornecedores, contratos, atendimento, etc.
+                  {average < 3
+                    ? "Seus conhecimentos e práticas sobre gestão da sua empresa está muito abaixo do recomendado.\nConfira abaixo sua nota por área, leia os conteúdos indicados e busque ajuda dos nossos parceiros!"
+                    : average < 5
+                    ? "Seus nível de conhecimento e práticas de gestão estão bons, porém alguns pontos podem melhorar.\nConfira sua nota por área abaixo e aperfeiçoe seus conhecimentos com os conteúdos que separamos para você e também com os nosso parceiros."
+                    : "Parabéns! Você domina a gestão da sua empresa! Caso acredite que algum ponto que não foi abordado, entre em contato com o atendimento Sebrae."}
                 </ResultDescription>
 
                 <CategoriesResultsGrade>
@@ -199,7 +224,11 @@ export default function Result() {
                             <CourseCardHeader href={course.url} target="_blank">
                               {course.title}
                             </CourseCardHeader>
-                            <CourseCardTitle color={course.color}>
+                            <CourseCardTitle
+                              href={course.url}
+                              target="_blank"
+                              color={course.color}
+                            >
                               {course.type}
                             </CourseCardTitle>
                             <CourseCardDescription>
@@ -216,9 +245,9 @@ export default function Result() {
               )}
 
               {/* <Chat>
-                    <ChatTitle>Chat</ChatTitle>
-                    <ChatText>Converse em tempo real com um especialista</ChatText>
-                  </Chat> */}
+                <ChatTitle>Chat</ChatTitle>
+                <ChatText>Converse em tempo real com um especialista</ChatText>
+              </Chat> */}
 
               <Partners>
                 <PartnersHeader>
@@ -235,11 +264,14 @@ export default function Result() {
                       <PartnersCardList key={partner.id}>
                         <PartnersCard
                           onClick={() =>
-                            history.push("/partner-detail", { results })
+                            history.push(`/partner-detail/${partner.id}`, {
+                              results,
+                              partnerId: partner.id
+                            })
                           }
                         >
                           <PartnersCardLeft>
-                            <PartnersLogo />
+                            <PartnersLogo src={partner.image} />
                           </PartnersCardLeft>
                           <PartnersCardRight>
                             <PartnersName>{partner.name}</PartnersName>
@@ -253,6 +285,39 @@ export default function Result() {
                   })}
                 </Slider>
               </Partners>
+
+              <Materials>
+                <MaterialsHeader>
+                  <MaterialsTitle>Na prática</MaterialsTitle>
+                  <SeeAll
+                    onClick={() => history.push("/materials", { results })}
+                  >
+                    Ver todos >
+                  </SeeAll>
+                </MaterialsHeader>
+                <Slider {...settings}>
+                  {materials?.map(material => {
+                    return (
+                      <MaterialsCardList key={material.id}>
+                        <MaterialsCard>
+                          <MaterialsCardLeft>
+                            <MaterialsLogo />
+                          </MaterialsCardLeft>
+                          <MaterialsCardRight>
+                            <MaterialsName>{material.name}</MaterialsName>
+                            <MaterialsDownload
+                              href={material.url}
+                              target="_blank"
+                            >
+                              Baixar arquivo
+                            </MaterialsDownload>
+                          </MaterialsCardRight>
+                        </MaterialsCard>
+                      </MaterialsCardList>
+                    );
+                  })}
+                </Slider>
+              </Materials>
             </>
           ) : (
             // <>Você precisa realizar o teste para acessar essa tela</>

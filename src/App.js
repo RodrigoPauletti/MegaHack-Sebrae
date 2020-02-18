@@ -8,11 +8,12 @@ import RegisterOptions from "./pages/Register/RegisterOptions/index.js";
 import RegisterNoCompany from "./pages/Register/RegisterNoCompany.js";
 import RegisterCompany from "./pages/Register/RegisterCompany.js";
 import Questions from "./pages/Questions/index.js";
-import Result from "./pages/Result/Result.js";
-import Courses from "./pages/Result/CoursesList.js";
-import Partners from "./pages/Result/PartnersList.js";
+import Result from "./pages/Result/index.js";
+import Courses from "./pages/Courses/index.js";
+import Partners from "./pages/Partners/index.js";
 import PartnerDetail from "./pages/Partners/PartnerDetail.js";
 import PartnerBudget from "./pages/Partners/PartnerBudget.js";
+import Materials from "./pages/Materials/index.js";
 
 function App() {
   return (
@@ -43,11 +44,14 @@ function App() {
           <Route path="/partners">
             <Partners />
           </Route>
-          <Route path="/partner-detail">
+          <Route path="/partner-detail/:id">
             <PartnerDetail />
           </Route>
           <Route path="/partner-budget">
             <PartnerBudget />
+          </Route>
+          <Route path="/materials">
+            <Materials />
           </Route>
         </Switch>
       </Router>

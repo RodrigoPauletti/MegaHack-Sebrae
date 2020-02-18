@@ -3,8 +3,13 @@ import styled from "styled-components";
 import fonts from "../../fonts.js";
 import { colors } from "../../variables.js";
 
-import contaAzul from "../../assets/conta-azul.png";
+import { Section as SectionInitial, WhiteCard } from "../../styles.js";
+
 import "./slick-styles.css";
+
+export const Section = styled(SectionInitial)`
+  margin: 0 !important;
+`;
 
 export const ResultGrades = styled.div``;
 
@@ -13,57 +18,6 @@ export const Text = styled.p`
   font-family: ${fonts.raleway};
   font-size: 16px;
   font-weight: 500;
-`;
-
-export const CardsContainer = styled.div`
-  margin-top: 62px;
-  width: 100%;
-`;
-
-export const Header = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-`;
-
-export const HeaderTitle = styled(Text)`
-  color: ${colors.gray};
-  font-size: 21px;
-  font-weight: 600;
-`;
-
-export const SeeAll = styled(Text)`
-  color: ${colors.seeAll};
-  font-weight: 600;
-  &:hover {
-    cursor: pointer;
-  }
-`;
-
-const Link = styled.a`
-  font-family: ${fonts.raleway};
-  text-decoration: none;
-  &:hover {
-    cursor: pointer;
-    text-decoration: underline;
-  }
-`;
-
-export const WhiteCard = styled.div`
-  border-radius: 20px;
-  background: ${colors.white};
-  padding: 24px;
-  box-shadow: 0 3px 6px #0000001c;
-`;
-
-export const CardList = styled.div`
-  display: flex;
-  align-items: start;
-  margin-top: 25px;
-  flex-wrap: nowrap;
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
-  -ms-overflow-style: -ms-autohiding-scrollbar;
 `;
 
 export const GradeContainer = styled.div`
@@ -111,6 +65,7 @@ export const ResultText = styled(Text)`
 
 export const ResultDescription = styled(Text)`
   color: ${colors.secondary};
+  white-space: pre-line;
 `;
 
 export const CategoriesResultsGrade = styled.div`
@@ -164,142 +119,18 @@ export const CategoryGradeText = styled(Text)`
   font-weight: 800;
 `;
 
-export const Courses = styled(CardsContainer)``;
+// export const Chat = styled(WhiteCard)`
+//   margin-top: 62px;
+// `;
 
-export const CoursesHeader = styled(Header)`
-  margin-bottom: 25px;
-`;
+// export const ChatTitle = styled(Text)`
+//   color: ${colors.gray};
+//   font-size: 21px;
+//   font-weight: 600;
+// `;
 
-export const CoursesTitle = styled(HeaderTitle)``;
-
-export const CoursesCardList = styled(CardList)``;
-
-export const CourseCard = styled.div`
-  display: flex;
-  flex: 0 0 auto;
-  flex-direction: column;
-  align-items: start;
-  width: 240px;
-  border-left: 4px solid ${props => props.color};
-  padding-left: 15px;
-  margin-right: 32px;
-`;
-
-export const CourseCardHeader = styled(Link)`
-  margin: 0;
-  color: ${colors.gray};
-  font-size: 16px;
-  font-weight: 500;
-  @media (min-width: 769px) {
-    font-size: 18px;
-  }
-`;
-
-export const CourseCardTitle = styled(Link)`
-  margin-top: 16px;
-  color: ${props => props.color};
-  font-size: 18px;
-  font-weight: 600;
-  @media (min-width: 769px) {
-    font-size: 20px;
-  }
-`;
-
-export const CourseCardDescription = styled(Text)`
-  margin-top: 8px;
-  color: ${colors.secondary};
-  font-size: 12px;
-  font-weight: 500;
-  @media (min-width: 769px) {
-    font-size: 15px;
-  }
-`;
-
-export const CoursesCardListCourseScreen = styled(CoursesCardList)`
-  flex-direction: column;
-`;
-
-export const CourseCardCourseScreen = styled(CourseCard)`
-  margin: 0 0 24px;
-  width: auto;
-`;
-
-export const Chat = styled(WhiteCard)`
-  margin-top: 62px;
-`;
-
-export const ChatTitle = styled(Text)`
-  color: ${colors.gray};
-  font-size: 21px;
-  font-weight: 600;
-`;
-
-export const ChatText = styled(Text)`
-  margin: 7px 0 19px;
-  color: ${colors.secondary};
-  font-size: 14px;
-`;
-
-export const Partners = styled(CardsContainer)``;
-
-export const PartnersHeader = styled(Header)`
-  margin-bottom: 25px;
-`;
-
-export const PartnersTitle = styled(HeaderTitle)``;
-
-export const PartnersCardList = styled.div``;
-
-export const PartnersCard = styled(WhiteCard)`
-  display: flex;
-  align-items: center;
-  padding: 28px;
-  &:hover {
-    cursor: pointer;
-  }
-`;
-
-export const PartnersCardLeft = styled.div``;
-
-export const PartnersLogo = styled.img.attrs({
-  src: contaAzul
-})`
-  width: 38px;
-  height: 38px;
-  margin-right: 32px;
-  &:hover {
-    cursor: pointer;
-  }
-`;
-
-export const PartnersCardRight = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
-
-export const PartnersName = styled(Text)`
-  font-size: 18px;
-  font-weight: 600;
-  color: ${colors.gray};
-`;
-
-export const PartnersCategory = styled(Text)`
-  color: ${colors.secondary};
-`;
-
-export const PartnersCardListPartnerScreen = styled(PartnersCardList)`
-  flex-direction: column;
-  margin-top: 25px;
-  @media (min-width: 769px) {
-    flex-direction: row;
-  }
-`;
-
-export const PartnerCardPartnerScreen = styled(PartnersCard)`
-  margin: 0 0 16px;
-  width: 264px;
-  @media (min-width: 769px) {
-    display: inline-flex;
-    margin: 0 5px 16px 0;
-  }
-`;
+// export const ChatText = styled(Text)`
+//   margin: 7px 0 19px;
+//   color: ${colors.secondary};
+//   font-size: 14px;
+// `;

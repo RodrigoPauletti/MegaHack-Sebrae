@@ -1,18 +1,36 @@
-import React from "react";
-import { useHistory } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { useHistory, useParams } from "react-router-dom";
 
-import { Container, Section, BackButton, Button } from "../../styles.js";
+import {
+  Container,
+  Section,
+  BackButton,
+  ButtonsContainer,
+  Button
+} from "../../styles.js";
 import {
   PartnerDetailContainer,
   PartnerDetailInfo,
-  PartnerDetailLogo,
+  PartnerDetailLogoRounded,
   PartnerDetailName,
   PartnerDetailType,
   PartnerDetailDescription
 } from "./styles.js";
+import partnersList from "./partners";
 
 export default function PartnerBudget() {
+  const [partner, setPartner] = useState(null);
+
   const history = useHistory();
+  const { id } = useParams();
+
+  useEffect(() => {
+    const getPartner = partnersList.find(
+      partner => partner.id === parseInt(id)
+    );
+    setPartner(getPartner);
+  }, [id]);
+
   const { results } = history.location.state
     ? history.location.state
     : { results: null };
@@ -25,24 +43,29 @@ export default function PartnerBudget() {
             <BackButton
               onClick={() => history.push("/partners", { results })}
             />
-            <PartnerDetailInfo>
-              <PartnerDetailLogo />
-              <PartnerDetailName>Conta Azul</PartnerDetailName>
-              <PartnerDetailType>Consultoria financeira</PartnerDetailType>
-              <PartnerDetailDescription>
-                Conta Azul é uma empresa de software brasileira que desenvolve e
-                vende uma plataforma de gestão de negócios, inteiramente em
-                nuvem, para micro e pequenas empresas, com uma extensão para
-                escritórios contábeis. A plataforma Conta Azul (para MPEs) e a
-                Conta Azul Mais (para contadores) possibilita integrações dos
-                clientes com governo, bancos etc
-              </PartnerDetailDescription>
-            </PartnerDetailInfo>
-            <Button
-              onClick={() => history.push("/partner-budget", { results })}
-            >
-              Solicitar orçamento
-            </Button>
+            {partner ? (
+              <>
+                <PartnerDetailInfo>
+                  <PartnerDetailLogoRounded src={partner.image} />
+                  <PartnerDetailName>{partner.name}</PartnerDetailName>
+                  <PartnerDetailType>{partner.type}</PartnerDetailType>
+                  <PartnerDetailDescription>
+                    {partner.description}
+                  </PartnerDetailDescription>
+                </PartnerDetailInfo>
+                <ButtonsContainer>
+                  <Button
+                    onClick={() =>
+                      history.push("/partner-budget", { results, partner })
+                    }
+                  >
+                    Solicitar orçamento
+                  </Button>
+                </ButtonsContainer>
+              </>
+            ) : (
+              ""
+            )}
           </PartnerDetailContainer>
         </Section>
       </Container>

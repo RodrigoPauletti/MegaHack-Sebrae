@@ -3,7 +3,7 @@ import styled, { createGlobalStyle, keyframes } from "styled-components";
 import fonts from "./fonts.js";
 import { colors } from "./variables.js";
 
-import logoSebrae from "./assets/logo-sebrae.png";
+import logoRaioX from "./assets/logo-raiox.svg";
 import arrowLeft from "./assets/arrow-left.svg";
 
 const animationName = keyframes`
@@ -39,22 +39,25 @@ export const Container = styled.div`
 export const Section = styled.section`
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
   width: 100%;
   max-width: 320px;
   padding: 20px;
   animation: ${animationName} 0.8s;
+  @media (max-width: 320px) {
+    max-width: 250px;
+  }
   @media (min-width: 769px) {
+    margin-top: 50px;
     max-width: 650px;
   }
-  @media (min-width: 1035px) {
+  @media (min-width: 1024px) {
     max-width: 990px;
   }
 `;
 
 export const Logo = styled.img.attrs({
-  src: logoSebrae
+  src: logoRaioX
 })`
   width: 100%;
   max-width: 170px;
@@ -76,8 +79,16 @@ export const BackButton = styled.img.attrs({
 `;
 
 export const Form = styled.form`
-  margin-top: 50px;
   width: 100%;
+  @media (min-width: 769px) {
+    margin-top: 50px;
+  }
+`;
+
+export const ButtonsContainer = styled.div`
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
 `;
 
 export const Button = styled.button.attrs({
@@ -87,21 +98,83 @@ export const Button = styled.button.attrs({
   background: ${colors.primary};
   border: 2px solid ${colors.primary};
   padding: 20px;
-  width: 100%;
-  color: ${colors.white};
+  width: 45%;
+  color: ${colors.background};
   font-family: ${fonts.raleway};
   font-size: 21px;
   font-weight: 700;
   border-radius: 8px;
   margin: 15px 0;
   transition: all 0.3s ease;
-  &:first-of-type {
-    margin-top: 5%;
-  }
   &:hover {
     cursor: pointer;
-    background: ${colors.white};
+    background: transparent;
     color: ${colors.primary};
     transition: all 0.3s ease;
   }
+  @media (max-width: 768px) {
+    font-size: 18px;
+    width: 100%;
+  }
+`;
+
+export const CardList = styled.div`
+  display: flex;
+  align-items: start;
+  margin-top: 25px;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  -ms-overflow-style: -ms-autohiding-scrollbar;
+`;
+
+export const CardsContainer = styled.div`
+  width: 100%;
+  @media (max-width: 768px) {
+    margin-top: 0;
+  }
+`;
+
+export const Header = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+export const TextInternal = styled.p`
+  margin: 0;
+  font-family: ${fonts.raleway};
+  font-size: 16px;
+  font-weight: 500;
+`;
+
+export const HeaderTitle = styled(TextInternal)`
+  color: ${colors.gray};
+  font-size: 21px;
+  font-weight: 600;
+`;
+
+export const SeeAll = styled(TextInternal)`
+  color: ${colors.seeAll};
+  font-weight: 600;
+  text-align: center;
+  &:hover {
+    cursor: pointer;
+  }
+`;
+
+export const Link = styled.a`
+  font-family: ${fonts.raleway};
+  text-decoration: none;
+  &:hover {
+    cursor: pointer;
+    text-decoration: underline;
+  }
+`;
+
+export const WhiteCard = styled.div`
+  border-radius: 20px;
+  background: ${colors.white};
+  padding: 24px;
+  box-shadow: 0 3px 6px #0000001c;
 `;

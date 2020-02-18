@@ -1,7 +1,14 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
 
-import { Container, Section, Logo, Form, Button } from "../../styles.js";
+import {
+  Container,
+  Section,
+  Logo,
+  Form,
+  ButtonsContainer,
+  Button
+} from "../../styles.js";
 
 import FormInput from "../../components/FormInput/index.js";
 import FormRadio from "../../components/FormRadio/index.js";
@@ -66,7 +73,9 @@ export default function RegisterNoCompany() {
                 "Veículos"
               ]}
             />
-            <Button>Próximo</Button>
+            <ButtonsContainer>
+              <Button>Próximo</Button>
+            </ButtonsContainer>
           </Form>
         </Section>
       </Container>

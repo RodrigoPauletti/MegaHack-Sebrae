@@ -39,10 +39,12 @@ export default function Result() {
                 return (
                   <PartnerCardPartnerScreen
                     key={partner.id}
-                    onClick={() => history.push("/partner-detail", { results })}
+                    onClick={() =>
+                      history.push(`/partner-detail/${partner.id}`, { results })
+                    }
                   >
                     <PartnersCardLeft>
-                      <PartnersLogo />
+                      <PartnersLogo src={partner.image} />
                     </PartnersCardLeft>
                     <PartnersCardRight>
                       <PartnersName>{partner.name}</PartnersName>

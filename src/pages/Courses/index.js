@@ -28,8 +28,8 @@ export default function Result() {
 
   function sortOrderedCourses(array1, array2) {
     let sortedArray = [];
-    if (array2.length > 0) {
-      if (array1.length > 0) {
+    if (array2 && array2.length > 0) {
+      if (array1 && array1.length > 0) {
         for (let i = 0; i < array1.length; i++) {
           for (let x = 0; x < array2.length; x++) {
             if (array2[x].type === array1[i].categoryName) {
@@ -58,7 +58,11 @@ export default function Result() {
                     <CourseCardHeader href={course.url} target="_blank">
                       {course.title}
                     </CourseCardHeader>
-                    <CourseCardTitle color={course.color}>
+                    <CourseCardTitle
+                      href={course.url}
+                      target="_blank"
+                      color={course.color}
+                    >
                       {course.type}
                     </CourseCardTitle>
                     <CourseCardDescription>
