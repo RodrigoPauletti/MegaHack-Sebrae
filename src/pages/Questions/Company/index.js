@@ -14,11 +14,7 @@ export default function QuestionsCompany({ type }) {
             "Eu acompanho meu fluxo de caixa, ou seja, controlo minha receitas e despesas de cada mês.",
             "Meus prazos de pagamento e recebimento são bem definidos de acordo com as minhas necessidades financeiras."
           ],
-          grades: [
-            Math.round(Math.random() * 5),
-            Math.round(Math.random() * 5),
-            Math.round(Math.random() * 5)
-          ]
+          grades: [0, 0, 0]
         },
         {
           categoryName: "Marketing/Vendas",
@@ -26,7 +22,7 @@ export default function QuestionsCompany({ type }) {
             "Eu tenho uma estratégia de vendas definida e atualizada.",
             "Eu divulgo a minha marca e meu produto/ serviço e avalio se estes investimentos trazem retorno para meu negócio."
           ],
-          grades: [Math.round(Math.random() * 5), Math.round(Math.random() * 5)]
+          grades: [0, 0]
         },
         {
           categoryName: "Operacional",
@@ -35,11 +31,7 @@ export default function QuestionsCompany({ type }) {
             "Eu revisito meu plano de negócios para mante-lo atualizado de acordo com o panorama atual do meu negócio e do mercado.",
             "Eu faço a gestão dos meus funcionários levando em conta fatores como: contratação, capacitação e com relação a aspectos trabalhistas."
           ],
-          grades: [
-            Math.round(Math.random() * 5),
-            Math.round(Math.random() * 5),
-            Math.round(Math.random() * 5)
-          ]
+          grades: [0, 0, 0]
         },
         {
           categoryName: "Produtos/Serviços",
@@ -49,12 +41,7 @@ export default function QuestionsCompany({ type }) {
             "Eu busco manter um diferencial competitivo para meu produto/serviço em relação ao mercado.",
             "Eu busco entender se o preço do meu produto/serviço está de acordo com fatores como: oferta e demanda, percepção de valor e necessidade financeira do meu negócio."
           ],
-          grades: [
-            Math.round(Math.random() * 5),
-            Math.round(Math.random() * 5),
-            Math.round(Math.random() * 5),
-            Math.round(Math.random() * 5)
-          ]
+          grades: [0, 0, 0, 0]
         }
       ]}
     />
